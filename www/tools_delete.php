@@ -12,7 +12,7 @@ if(    isset($_GET['id'])     ){
 
     $id = $_GET["id"];
 
-    $sql = "DELETE FROM tools WHERE tool_id = $id";
+    $sql = "DELETE FROM tools WHERE tool_id = '" . mysqli_real_escape_string($conn, $id) . "'";
 
     mysqli_query($conn, $sql);
 

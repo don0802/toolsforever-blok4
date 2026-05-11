@@ -37,14 +37,14 @@ $address = $_POST['address'];
 $city = $_POST['city'];
 $is_active = 1;
 
-$sql = "INSERT INTO users (email, password, firstname, lastname, role, address, city, is_active) VALUES ('$email', '$password', '$firstname', '$lastname', '$role', '$address', '$city', '$is_active')";
+$sql = "INSERT INTO users (email, password, firstname, lastname, role, address, city, is_active) VALUES ('" . mysqli_real_escape_string($conn, $email) . "', '" . mysqli_real_escape_string($conn, $password) . "', '" . mysqli_real_escape_string($conn, $firstname) . "', '" . mysqli_real_escape_string($conn, $lastname) . "', '" . mysqli_real_escape_string($conn, $role) . "', '" . mysqli_real_escape_string($conn, $address) . "', '" . mysqli_real_escape_string($conn, $city) . "', '$is_active')";
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
     $user_id = mysqli_insert_id($conn);
     $backgroundColor = $_POST['backgroundColor'];
     $font = $_POST['font'];
-    $sql = "INSERT INTO user_settings (user_id, backgroundColor, font) VALUES ('$user_id', '$backgroundColor', '$font')";
+    $sql = "INSERT INTO user_settings (user_id, backgroundColor, font) VALUES ('$user_id', '" . mysqli_real_escape_string($conn, $backgroundColor) . "', '" . mysqli_real_escape_string($conn, $font) . "')";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header("Location: users_index.php");

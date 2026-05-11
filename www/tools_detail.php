@@ -5,7 +5,7 @@ require 'database.php';
 
 if (isset($_GET['id'])) {
     $tool_id = $_GET['id'];
-    $sql = "SELECT * FROM tools WHERE tool_id = $tool_id";
+    $sql = "SELECT * FROM tools WHERE tool_id = '" . mysqli_real_escape_string($conn, $tool_id) . "'";
     $result = mysqli_query($conn, $sql);
     $tool = mysqli_fetch_assoc($result);
 }

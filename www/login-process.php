@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 
             $conn = mysqli_connect('mariadb', 'root', 'password', 'tools4ever');
 
-            $sql = "SELECT * FROM users WHERE email='$emailForm'";
+            $sql = "SELECT * FROM users WHERE email = '" . mysqli_real_escape_string($conn, $emailForm) . "'";
             $result = mysqli_query($conn, $sql);
 
             //als de email bestaat dan is het resultaat groter dan 0
