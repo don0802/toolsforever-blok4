@@ -7,9 +7,9 @@ $dbuser = 'root';
 $dbpass = 'password';
 $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 
-$stmt = $conn->prepare("INSERT INTO tools (tool_name, tool_category, tool_price, tool_brand) VALUES (:tool_name, :tool_category, :tool_price, :tool_brand)");
+$stmt = $conn->prepare("INSERT INTO tools (tool_name, tool_category, tool_price, tool_brand, tool_image) VALUES (:tool_name, :tool_category, :tool_price, :tool_brand, :tool_image)");
 
-$stmt->execute(['tool_name' => 'Hamer 2000', 'tool_category' => 'Hamers', 'tool_price' => '100', 'tool_brand' => 'Makita']);
+$stmt->execute(['tool_name' => 'Hamer 2000', 'tool_category' => 'Hamers', 'tool_price' => '100', 'tool_brand' => 'Makita', 'tool_image' => 'default.jpg']);
 
 // Check connection
 if (!$conn) {
