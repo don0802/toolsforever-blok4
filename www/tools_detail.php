@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+$id = $_GET['id'];
+$stmt = $conn->prepare("SELECT * FROM tools WHERE tool_id = :id");
+$stmt->execute(['id' => $id]);
+$tool = $stmt->fetch(PDO::FETCH_ASSOC);
+
 require 'database.php';
 
 if (isset($_GET['id'])) {

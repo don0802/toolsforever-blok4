@@ -1,5 +1,9 @@
 <?php
 
+$stmt = $conn->prepare("SELECT * FROM tools");
+$stmt->execute();
+$tools = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 require 'header.php';
 ?>
 <main>
