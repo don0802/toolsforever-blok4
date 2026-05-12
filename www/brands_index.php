@@ -17,8 +17,8 @@ require 'header.php';
     <div class="container">
         <?php foreach ($brands as $brand) : ?>
             <div class="brand-info">
-                <img src="<?php echo isset($brand['brand_image']) ? 'images/' . $brand['brand_image'] : 'https://placehold.co/200' ?>" alt="<?php echo htmlspecialchars($brand['brand_name']) ?>">
-                <h3><?php echo htmlspecialchars($brand['brand_name']) ?></h3>
+                <img src="<?php echo isset($brand['brand_image']) ? 'images/' . htmlspecialchars($brand['brand_image']) ?? '' : 'https://placehold.co/200' ?>" alt="<?php echo htmlspecialchars($brand['brand_name']) ?? '' ?>">
+                <h3><?php echo htmlspecialchars($brand['brand_name']) ?? '' ?></h3>
 
             </div>
         <?php endforeach; ?>

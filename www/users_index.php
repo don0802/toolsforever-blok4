@@ -36,16 +36,16 @@ require 'header.php';
             <tbody>
                 <?php foreach ($users as $user) : ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($user['firstname']) ?></td>
-                        <td><?php echo htmlspecialchars($user['lastname']) ?></td>
-                        <td><?php echo htmlspecialchars($user['email']) ?></td>
-                        <td><?php echo htmlspecialchars($user['role']) ?></td>
+                        <td><?php echo htmlspecialchars($user['firstname'] ?? '') ?></td>
+                        <td><?php echo htmlspecialchars($user['lastname'] ?? '') ?></td>
+                        <td><?php echo htmlspecialchars($user['email'] ?? '') ?></td>
+                        <td><?php echo htmlspecialchars($user['role'] ?? '') ?></td>
                         <td>
-                            <a href="users_detail.php?id=<?php echo htmlspecialchars($user['id']) ?>">Bekijk</a>
-                            <a href="users_edit.php?id=<?php echo htmlspecialchars($user['id']) ?>">Wijzig</a>
+                            <a href="users_detail.php?id=<?php echo htmlspecialchars($user['id']) ?? '' ?>">Bekijk</a>
+                            <a href="users_edit.php?id=<?php echo htmlspecialchars($user['id']) ?? '' ?>">Wijzig</a>
                       
-                            <!-- <a href="users_edit.php?id=<?php echo htmlspecialchars($user['id']) ?>">Wijzig</a>  -->
-                            <a href="users_delete.php?id=<?php echo htmlspecialchars($user['id']) ?>" onclick="return confirm('Weet je het zeker dat je deze gebruiker wilt verwijderen?')">Verwijder</a>
+                            <!-- <a href="users_edit.php?id=<?php echo htmlspecialchars($user['id']) ?? '' ?>">Wijzig</a>  -->
+                            <a href="users_delete.php?id=<?php echo htmlspecialchars($user['id']) ?? '' ?>" onclick="return confirm('Weet je het zeker dat je deze gebruiker wilt verwijderen?')">Verwijder</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

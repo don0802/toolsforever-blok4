@@ -35,17 +35,15 @@ require 'header.php';
         <tbody>
             <?php foreach ($tools as $tool) : ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($tool['tool_name']) ?></td>
-                    <td><?php echo htmlspecialchars($tool['tool_category']) ?></td>
-                    <td><?php echo htmlspecialchars($tool['tool_price']) ?></td>
-                    <td><?php echo htmlspecialchars($tool['tool_brand']) ?></td>
+                    <td><?php echo htmlspecialchars($tool['tool_name']) ?? '' ?></td>
+                    <td><?php echo htmlspecialchars($tool['tool_category']) ?? '' ?></td>
+                    <td><?php echo htmlspecialchars($tool['tool_price']) ?? '' ?></td>
+                    <td><?php echo htmlspecialchars($tool['tool_brand']) ?? '' ?></td>
                     <td>
 
-                        <a href="tools_detail.php?id=<?php echo htmlspecialchars($tool['tool_id']) ?>">Bekijk</a>
-                        Wijzig
-                        Verwijder
-                        <!-- <a href="tools_edit.php?id=<?php echo htmlspecialchars($tool['tool_id']) ?>">Wijzig</a> -->
-                        <a href="tools_delete.php?id=<?php echo htmlspecialchars($tool['tool_id']) ?>"
+                        <a href="tools_detail.php?id=<?php echo htmlspecialchars($tool['tool_id']) ?? '' ?>">Bekijk</a>
+                        <a href="tools_edit.php?id=<?php echo htmlspecialchars($tool['tool_id']) ?? '' ?>">Wijzig</a>
+                        <a href="tools_delete.php?id=<?php echo htmlspecialchars($tool['tool_id']) ?? '' ?>"
                         onclick="return confirm('weet je het zeker dat je deze tool wilt verwijderen?')"
                         >
                         Verwijder
