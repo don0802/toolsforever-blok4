@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if ($_SESSION['role'] != 'administrator') {
+if ($_SESSION['role'] != 'admin') {
     echo "You are not allowed to view this page, please login as admin";
     exit;
 }
@@ -29,7 +29,7 @@ if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['ema
 }
 
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $role = $_POST['role'];
@@ -40,12 +40,15 @@ $is_active = 1;
 $sql = "INSERT INTO users (email, password, firstname, lastname, role, address, city, is_active) VALUES ('" . mysqli_real_escape_string($conn, $email) . "', '" . mysqli_real_escape_string($conn, $password) . "', '" . mysqli_real_escape_string($conn, $firstname) . "', '" . mysqli_real_escape_string($conn, $lastname) . "', '" . mysqli_real_escape_string($conn, $role) . "', '" . mysqli_real_escape_string($conn, $address) . "', '" . mysqli_real_escape_string($conn, $city) . "', '$is_active')";
 $result = mysqli_query($conn, $sql);
 
-if ($result) {
-    $user_id = mysqli_insert_id($conn);
+$stmt = $conn->prepare("INSERT INTO users (email, password, firstname, lastname, role, address, city, is_active) VALUES (:email, :password, :firstname, :lastname, :role, :address, :city, :is_active)");
+$result = $stmt->execute(['email' => $email, 'password' => $password, 'firstname' => $firstname, 'lastname' => $lastname, 'role' => $role, 'address' => $address, 'city' => $city, 'is_active' => $is_active]);
+
+if($result){
+    $stmt->lastInsertId();
     $backgroundColor = $_POST['backgroundColor'];
     $font = $_POST['font'];
-    $sql = "INSERT INTO user_settings (user_id, backgroundColor, font) VALUES ('$user_id', '" . mysqli_real_escape_string($conn, $backgroundColor) . "', '" . mysqli_real_escape_string($conn, $font) . "')";
-    $result = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO user_settings (user_id, backgroundColor, font) VALUES (:user_id, :backgroundColor, :font)";
+    $result = $stmt->execute(['user_id' => $user_id, 'backgroundColor' => $backgroundColor, 'font' => $font]);
     if ($result) {
         header("Location: users_index.php");
     } else {

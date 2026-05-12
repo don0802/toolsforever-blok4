@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if ($_SESSION['role'] != 'administrator') {
+if ($_SESSION['role'] != 'admin') {
     echo "You are not allowed to view this page, please login as admin";
     exit;
 }
@@ -30,15 +30,15 @@ require 'header.php';
     <div class="container">
         <?php if (isset($user)) : ?>
             <div class="user-detail">
-                <h3><?php echo $user['firstname'] ?></h3>
-                <p><?php echo $user['lastname'] ?></p>
-                <p><?php echo $user['email'] ?></p>
-                <p><?php echo $user['role'] ?></p>
-                <p><?php echo $user['address'] ?></p>
-                <p><?php echo $user['city'] ?></p>
-                <p><?php echo $user['is_active'] == 1 ? "is actief" : "Is niet actief"  ?></p>
-                <p><?php echo $user['backgroundColor'] ?></p>
-                <p><?php echo $user['font'] ?></p>
+                <h3><?php echo htmlspecialchars($user['firstname'] ?? '') ?></h3>
+                <p><?php echo htmlspecialchars($user['lastname'] ?? '') ?></p>
+                <p><?php echo htmlspecialchars($user['email'] ?? '') ?></p>
+                <p><?php echo htmlspecialchars($user['role'] ?? '') ?></p>
+                <p><?php echo htmlspecialchars($user['address'] ?? '') ?></p>
+                <p><?php echo htmlspecialchars($user['city'] ?? '') ?></p>
+                <p><?php echo htmlspecialchars(($user['is_active'] ?? 0) == 1 ? "is actief" : "Is niet actief") ?></p>
+                <p><?php echo htmlspecialchars($user['backgroundColor'] ?? '') ?></p>
+                <p><?php echo htmlspecialchars($user['font'] ?? '') ?></p>
             <?php else : ?>
                 Geen gebruiker gevonden
             <?php endif; ?>

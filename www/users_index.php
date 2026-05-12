@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if ($_SESSION['role'] != 'administrator') {
+if ($_SESSION['role'] != 'admin') {
     echo "You are not allowed to view this page, please login as admin";
     exit;
 }
@@ -36,16 +36,16 @@ require 'header.php';
             <tbody>
                 <?php foreach ($users as $user) : ?>
                     <tr>
-                        <td><?php echo $user['firstname'] ?></td>
-                        <td><?php echo $user['lastname'] ?></td>
-                        <td><?php echo $user['email'] ?></td>
-                        <td><?php echo $user['role'] ?></td>
+                        <td><?php echo htmlspecialchars($user['firstname']) ?></td>
+                        <td><?php echo htmlspecialchars($user['lastname']) ?></td>
+                        <td><?php echo htmlspecialchars($user['email']) ?></td>
+                        <td><?php echo htmlspecialchars($user['role']) ?></td>
                         <td>
-                            <a href="users_detail.php?id=<?php echo $user['id'] ?>">Bekijk</a>
-                            Wijzig
+                            <a href="users_detail.php?id=<?php echo htmlspecialchars($user['id']) ?>">Bekijk</a>
+                            <a href="users_edit.php?id=<?php echo htmlspecialchars($user['id']) ?>">Wijzig</a>
                       
-                            <!-- <a href="users_edit.php?id=<?php echo $user['id'] ?>">Wijzig</a>  -->
-                            <a href="users_delete.php?id=<?php echo $user['id'] ?>">Verwijder</a>
+                            <!-- <a href="users_edit.php?id=<?php echo htmlspecialchars($user['id']) ?>">Wijzig</a>  -->
+                            <a href="users_delete.php?id=<?php echo htmlspecialchars($user['id']) ?>" onclick="return confirm('Weet je het zeker dat je deze gebruiker wilt verwijderen?')">Verwijder</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

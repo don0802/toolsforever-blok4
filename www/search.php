@@ -23,7 +23,7 @@ $sql = "SELECT COUNT(*) AS aantal FROM tools";
 $result = mysqli_query($conn, $sql);
 $resultaat_array = mysqli_fetch_assoc($result);
 $aantal = $resultaat_array['aantal'];
-echo $aantal;
+echo htmlspecialchars($aantal);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +44,10 @@ echo $aantal;
     <div class="container">
         <h1>Resultaten</h1>
         <?php foreach ($tools as $tool) : ?>
+            <div class="tool-info">
+                <h3><?php echo htmlspecialchars($tool['name']) ?></h3>
+                <p><?php echo htmlspecialchars($tool['description']) ?></p>
+            </div>
         <?php endforeach; ?>
     </div>
 </body>
